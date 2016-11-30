@@ -24,3 +24,7 @@ Route::get('/login/refresh', 'AuthenticateSpotifyController@spotifyRefresh');
 Route::get('/mystatsdata', 'RetrieveStatsController@retrieveData');
 
 Route::get('/mystats', 'RetrieveStatsController@viewStats');
+
+Route::get('/test', function() {
+    return view('flex');
+});
