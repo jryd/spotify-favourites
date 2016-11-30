@@ -3,6 +3,7 @@
     <head>
         <title>My Stats | Laravel Spotify</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="{{ secure_asset('assets/css/custom.css') }}" />
     </head>
     
@@ -32,6 +33,7 @@
             </div>
             
             <div class="row top-buffer">
+                <p v-if="loading"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i></p>
                 <ol v-if="type == 'tracks'" class="list-group">
                     <li v-for="track in tracks[0]" class="list-group-item">@{{ track.name }} - @{{ track.artists[0].name }}</li>
                 </ol>
@@ -54,6 +56,7 @@
 
                     tracks: [],
                     type: 'tracks',
+                    loading: '',
             
                 },
                 
@@ -61,12 +64,20 @@
                     //
                 },
                 
+                watch: {
+                    type: function() {
+                        this.fetchStats();
+                    }
+                },
+                
                 methods: {
                     fetchStats: function()
                     {
+                        this.loading = 'loading';
+                        this.tracks = [];
                         this.$http.get('/mystatsdata', {params:  {type: this.type}}).then((response) => {
                             console.log('fetched');
-                            this.tracks = [];
+                            this.loading = '';
                             this.tracks.push(response.body);
                           }, (response) => {
                             // error callback
