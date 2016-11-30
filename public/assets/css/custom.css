@@ -1,0 +1,10 @@
+.list-group {
+	list-style: decimal inside;
+	display: inline-block;
+}
+
+.list-group-item {
+	display: list-item;
+}
+
+.top-buffer { margin-top:20px; }
