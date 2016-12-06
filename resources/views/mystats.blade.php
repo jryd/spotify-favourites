@@ -15,9 +15,9 @@
         <link rel="stylesheet" href="{{ secure_asset('assets/css/custom.css') }}" />
     </head>
     
-    <body>
+    <body class="theme-red">
         <div id="mystats" class="container">
-            <h1>My Top Tracks</h1>
+            <h1>My Top Artists &amp; Tracks</h1>
             
             <div class="row">
                 <div class="card" v-if="tracks.length < 1" id="queryOptions">
@@ -28,7 +28,7 @@
                     </div>
                     <div class="body">
                         <form v-on:submit.prevent="fetchStats">
-                            <h2 class="card-inside-title">Stat options</h2>
+                            <h2 class="card-inside-title">Track or artist?</h2>
                             <p>
                                 <input name="statRadio" type="radio" class="with-gap radio-col-red" id="tracks" value="tracks" v-model="type">
                                 <label for="tracks">Top tracks</label>
@@ -37,20 +37,21 @@
                                 <input name="statRadio" type="radio" class="with-gap radio-col-red" id="artists" value="artists" v-model="type">
                                 <label for="artists">Top artists</label>
                             </p>
-                                <h2 class="card-inside-title">Term options</h2>
+                                <h2 class="card-inside-title">When calculating this, how much data should we look at?</h2>
                                 <p>
                                     <input name="termRadio" type="radio" class="with-gap radio-col-red" value="short_term" id="short_term" v-model="term">
-                                    <label for="short_term">Short term</label>
+                                    <label for="short_term">Last 4 weeks</label>
                                 </p>
                                 <p>
                                     <input name="termRadio" type="radio" class="with-gap radio-col-red" value="medium_term" id="medium_term" v-model="term">
-                                    <label for="medium_term">Medium term</label>
+                                    <label for="medium_term">Last 6 months</label>
                                 </p>
                                 <p>
                                     <input name="termRadio" type="radio" class="with-gap radio-col-red" value="long_term" id="long_term" v-model="term">
-                                    <label for="long_term">Long term</label>
+                                    <label for="long_term">Since the beginning of time</label>
                                 </p>
                             <button class="btn btn-primary">Fetch Stats</button>
+                            <p style="padding-top: 10px;"><small data-toggle="tooltip" data-placement="right" title="Measured on the expected preference a user has for a particular track or artist. It is based on user behavior, including play history." style="display:inline-block;">How is this calculated?</small></p>
                         </form>
                     </div>
                 </div>
@@ -91,6 +92,26 @@
             </div>
         </div>
         
+        <div class="modal fade" id="howCalculatedModal" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="defaultModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros vestibulum ut. Ut accumsan
+                        vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
+                        Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
+                        nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
+                        Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.min.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script>
@@ -112,7 +133,9 @@
                 },
                 
                 mounted: function() {
-                    //
+                    jQuery(function () {
+                        jQuery('[data-toggle="tooltip"]').tooltip()
+                    });
                 },
                 
                 watch: {

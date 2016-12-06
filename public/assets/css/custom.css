@@ -60,3 +60,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.navbar-header {
+    float: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-container {
+  margin-top: 100px;
+}
