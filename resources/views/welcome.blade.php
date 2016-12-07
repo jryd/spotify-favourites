@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Welcome | Laravel Spotify</title>
+        <title>Welcome | Spotify Favourites</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -19,7 +19,7 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <p class="navbar-brand">My Favourites</p>
+                    <p class="navbar-brand">Spotify Favourites</p>
                 </div>
             </div>
         </nav>

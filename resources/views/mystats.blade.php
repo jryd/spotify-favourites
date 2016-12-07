@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>My Stats | Laravel Spotify</title>
+        <title>My Stats | Spotify Favourites</title>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -20,7 +20,7 @@
             <h1>My Top Artists &amp; Tracks</h1>
             
             <div class="row">
-                <div class="card" v-if="tracks.length < 1" id="queryOptions">
+                <div class="card" v-show="tracks.length < 1" id="queryOptions">
                     <div class="header bg-red">
                         <h2>
                             Query Options <small>What do you want to check out?</small>
@@ -55,14 +55,14 @@
                         </form>
                     </div>
                 </div>
-                <div class="resetbutton" v-else>
+                <div class="resetbutton" v-show="tracks.length > 0">
                     <button class="btn btn-primary" v-on:click="reset">Go again!</button>
                 </div>
             </div>
             
             <div class="row top-buffer">
                 
-                <div class="col-md-4 col-sm-6 col-xs-10" v-if="type == 'tracks'" v-for="(track, index) in tracks">
+                <div class="col-md-4" v-if="type == 'tracks'" v-for="(track, index) in tracks">
                     <div class="card">
                         <div class="header bg-red">
                             <h2 class="nameHeading">
@@ -92,26 +92,6 @@
             </div>
         </div>
         
-        <div class="modal fade" id="howCalculatedModal" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="defaultModalLabel">Modal title</h4>
-                    </div>
-                    <div class="modal-body">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros vestibulum ut. Ut accumsan
-                        vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
-                        Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
-                        nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
-                        Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.min.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script>
@@ -133,8 +113,8 @@
                 },
                 
                 mounted: function() {
-                    jQuery(function () {
-                        jQuery('[data-toggle="tooltip"]').tooltip()
+                    $(function () {
+                        $('[data-toggle="tooltip"]').tooltip()
                     });
                 },
                 
@@ -145,7 +125,7 @@
                 methods: {
                     fetchStats: function()
                     {
-                        jQuery('#queryOptions').waitMe({
+                        $('#queryOptions').waitMe({
                             effect : 'rotation',
                             text : '',
                             bg : 'rgba(255,255,255,0.7)',
@@ -160,7 +140,11 @@
                         this.$http.get('/mystatsdata', {params:  {type: this.type, time_range: this.term}}).then((response) => {
                             console.log('fetched');
                             this.tracks = response.body;
-                            jQuery('#queryOptions').waitMe('hide');
+                            $('#queryOptions').waitMe('hide');
+                            this.$nextTick(function()
+                            {
+                                $('.bg-image').css('height', $('.bg-image').width());
+                            });
                             }, (response) => {
                             // error callback
                         });

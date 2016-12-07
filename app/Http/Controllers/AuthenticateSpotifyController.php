@@ -31,6 +31,7 @@ class AuthenticateSpotifyController extends Controller
         ]);
         
         session(['spotify_token' => json_decode($response->getBody())->access_token]);
+        session(['spotify_refresh' => json_decode($response->getBody())->refresh_token]);
         return redirect('/mystats');
         /*$access_token = json_decode($response->getBody())->access_token;
         $refresh_token = json_decode($response->getBody())->refresh_token;
