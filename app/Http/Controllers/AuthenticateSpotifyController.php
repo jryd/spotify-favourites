@@ -19,6 +19,11 @@ class AuthenticateSpotifyController extends Controller
     
     public function spotifyCallback(\GuzzleHttp\Client $httpClient)
     {
+        if (isset($_GET['error']))
+        {
+            return redirect('/denied');
+        }
+        
         $response = $httpClient->post('https://accounts.spotify.com/api/token', [
             'form_params' => [
                 'client_id' => env('SPOTIFY_KEY'),
@@ -33,5 +38,10 @@ class AuthenticateSpotifyController extends Controller
         session(['spotify_token' => json_decode($response->getBody())->access_token]);
         session(['spotify_refresh' => json_decode($response->getBody())->refresh_token]);
         return redirect('/myfavourites');
+    }
+    
+    public function denied()
+    {
+        return view('denied');
     }
 }

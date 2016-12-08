@@ -19,6 +19,8 @@ Route::get('/login/spotify', 'AuthenticateSpotifyController@spotifyLogin');
 
 Route::get('/callback', 'AuthenticateSpotifyController@spotifyCallback');
 
+Route::get('/denied', 'AuthenticateSpotifyController@denied');
+
 Route::get('/login/refresh', 'AuthenticateSpotifyController@spotifyRefresh');
 
 Route::get('/myfavouritesdata', 'RetrieveStatsController@retrieveData');
