@@ -21,6 +21,6 @@ Route::get('/callback', 'AuthenticateSpotifyController@spotifyCallback');
 
 Route::get('/login/refresh', 'AuthenticateSpotifyController@spotifyRefresh');
 
-Route::get('/mystatsdata', 'RetrieveStatsController@retrieveData');
+Route::get('/myfavouritesdata', 'RetrieveStatsController@retrieveData');
 
-Route::get('/mystats', 'RetrieveStatsController@viewStats');
+Route::get('/myfavourites', 'RetrieveStatsController@viewStats');
