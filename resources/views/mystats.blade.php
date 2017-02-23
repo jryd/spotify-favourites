@@ -101,6 +101,7 @@
                             <i :style="{ 'background-image': `url(${track.album.images[1].url})` }" :alt="track.name" class="bg-image"></i>
                             <button class="btn btn-primary" v-on:click="fetchAnalysedTrack(track.id)" style="margin-top:10px;">See Track Elements</button>
                         </div>
+                    </div>
                 </div>
                 
                 <div class="col-md-4" v-if="type == 'artists'" v-for="(track, index) in tracks">
@@ -117,23 +118,24 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="modal fade" id="mdModal" tabindex="-1" role="dialog" style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="defaultModalLabel">Audio Elements from Track</h4>
-                    </div>
-                    <div class="modal-body">
-                        <canvas id="analysedTrackRadar"></canvas>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Close</button>
+            <div class="modal fade" id="mdModal" tabindex="-1" role="dialog" style="display: none;">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="defaultModalLabel">Audio Elements from Track</h4>
+                        </div>
+                        <div class="modal-body">
+                            <canvas id="analysedTrackRadar"></canvas>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" v-on:click="destroyAnalysedTrackRadar">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script>

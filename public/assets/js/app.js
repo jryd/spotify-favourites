@@ -10,7 +10,7 @@ $vue = new Vue({
         analysedTrack: [],
         analysedTrackLabels: ['acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness', 'speechiness', 'valence'],
         analysedTrackDataSet: [],
-
+        myRadarChart: '',
     },
     
     mounted: function() {
@@ -82,7 +82,7 @@ $vue = new Vue({
                         display: false
                     }
                 };
-                var myRadarChart = new Chart($("#analysedTrackRadar"), {
+                this.myRadarChart = new Chart($("#analysedTrackRadar"), {
                     type: 'radar',
                     data: data,
                     options: {
@@ -94,6 +94,10 @@ $vue = new Vue({
                 $("#mdModal").modal('show');
                 $('body').waitMe('hide');
             });
+        },
+        destroyAnalysedTrackRadar: function()
+        {
+            this.myRadarChart.destroy();
         },
     }
 })
