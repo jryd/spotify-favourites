@@ -1,4 +1,5 @@
 $vue = new Vue({
+    
     el: '#mystats',
     
     data: {
@@ -6,7 +7,9 @@ $vue = new Vue({
         tracks: [],
         type: 'tracks',
         term: 'medium_term',
-        loading: '',
+        analysedTrack: [],
+        analysedTrackLabels: ['acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness', 'speechiness', 'valence'],
+        analysedTrackDataSet: [],
 
     },
     
@@ -33,7 +36,6 @@ $vue = new Vue({
                 fontSize : '',
                 source : ''
             });
-            this.loading = 'loading';
             this.tracks = [];
             this.$http.get('/myfavouritesdata', {params:  {type: this.type, time_range: this.term}}).then((response) => {
                 this.tracks = response.body;
@@ -47,6 +49,51 @@ $vue = new Vue({
         reset: function()
         {
             this.tracks = [];
-        }
+        },
+        fetchAnalysedTrack: function(track)
+        {
+            $('body').waitMe({
+                effect : 'rotation',
+                text : '',
+                bg : 'rgba(255,255,255,0.7)',
+                color : '#f44336',
+                maxSize : '',
+                textPos : 'vertical',
+                fontSize : '',
+                source : ''
+            });
+            this.analysedTrack = [];
+            this.$http.get('/analysedtrackdata', {params:  {track: track}}).then((response) => {
+                this.analysedTrack = response.body;
+                this.analysedTrackDataSet = [this.analysedTrack.acousticness, this.analysedTrack.danceability, this.analysedTrack.energy, this.analysedTrack.instrumentalness, this.analysedTrack.liveness, this.analysedTrack.speechiness, this.analysedTrack.valence];
+                var data = {
+                    labels: this.analysedTrackLabels,
+                    datasets: [
+                        {
+                            label: "Analysed Track Elements",
+                            backgroundColor: "rgba(246,104,94,0.2)",
+                            borderColor: "#f44336",
+                            pointBackgroundColor: "rgba(246,104,94,1)",
+                            pointBorderColor: "#f44336",
+                            data: this.analysedTrackDataSet
+                        }
+                    ],
+                    legend: {
+                        display: false
+                    }
+                };
+                var myRadarChart = new Chart($("#analysedTrackRadar"), {
+                    type: 'radar',
+                    data: data,
+                    options: {
+                        legend: {
+                        display: false
+                        }
+                    }
+                });
+                $("#mdModal").modal('show');
+                $('body').waitMe('hide');
+            });
+        },
     }
 })

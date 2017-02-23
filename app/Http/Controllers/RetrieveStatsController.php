@@ -59,5 +59,17 @@ class RetrieveStatsController extends Controller
         }
         
         return redirect('/login/spotify');
-    }   
+    }
+    
+    public function retrieveAnalysedTrackData(\GuzzleHttp\Client $httpClient)
+    {
+        $response = $httpClient->get('https://api.spotify.com/v1/audio-features/'.$_GET['track'], [
+            'headers' => [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer ' . session('spotify_token'),
+            ],
+        ]);
+
+        return response()->json(json_decode($response->getBody()));
+    }
 }

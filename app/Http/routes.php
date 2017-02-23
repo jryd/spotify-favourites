@@ -23,6 +23,7 @@ Route::get('/denied', 'AuthenticateSpotifyController@denied');
 
 Route::get('/login/refresh', 'AuthenticateSpotifyController@spotifyRefresh');
 
-Route::get('/myfavouritesdata', 'RetrieveStatsController@retrieveData');
-
 Route::get('/myfavourites', 'RetrieveStatsController@viewStats');
+
+Route::get('/myfavouritesdata', 'RetrieveStatsController@retrieveData');
+Route::get('/analysedtrackdata', 'RetrieveStatsController@retrieveAnalysedTrackData');

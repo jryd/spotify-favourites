@@ -22,7 +22,7 @@
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css" />
+        <link rel="stylesheet" href="{{ secure_asset('assets/css/dist/materialize.css') }}" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
         <link rel="stylesheet" href="{{ secure_asset('assets/css/dist/style.min.css') }}" />
         <link rel="stylesheet" href="{{ secure_asset('assets/css/dist/theme.min.css') }}" />
@@ -99,8 +99,8 @@
                         </div>
                         <div class="body">
                             <i :style="{ 'background-image': `url(${track.album.images[1].url})` }" :alt="track.name" class="bg-image"></i>
+                            <button class="btn btn-primary" v-on:click="fetchAnalysedTrack(track.id)" style="margin-top:10px;">See Track Elements</button>
                         </div>
-                    </div>
                 </div>
                 
                 <div class="col-md-4" v-if="type == 'artists'" v-for="(track, index) in tracks">
@@ -119,11 +119,28 @@
             </div>
         </div>
         
+        <div class="modal fade" id="mdModal" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="defaultModalLabel">Audio Elements from Track</h4>
+                    </div>
+                    <div class="modal-body">
+                        <canvas id="analysedTrackRadar"></canvas>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{{ secure_asset('assets/js/dist/waitme.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <script src="{{ secure_asset('assets/js/app.js') }}"></script>
     </body>
 </html>
