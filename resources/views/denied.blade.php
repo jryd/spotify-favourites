@@ -24,10 +24,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="{{ secure_asset('assets/css/dist/style.min.css') }}" />
-        <link rel="stylesheet" href="{{ secure_asset('assets/css/dist/theme.min.css') }}" />
-        <link rel="stylesheet" href="{{ secure_asset('assets/css/dist/waitme.min.css') }}" />
-        <link rel="stylesheet" href="{{ secure_asset('assets/css/custom.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/dist/style.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/dist/theme.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/dist/waitme.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" />
         
         @if (App::environment('production'))
         <script>
