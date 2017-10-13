@@ -100,6 +100,7 @@
                         <div class="body">
                             <i :style="{ 'background-image': `url(${track.album.images[1].url})` }" :alt="track.name" class="bg-image"></i>
                             <button class="btn btn-primary" v-on:click="fetchAnalysedTrack(track.id)" style="margin-top:10px;">See Track Elements</button>
+                            <a :href="track.external_urls.spotify" class="btn btn-primary" style="margin-top: 10px;" target="_blank"><i class="fa fa-play"></i> Play</a>
                         </div>
                     </div>
                 </div>
@@ -137,8 +138,8 @@
         
         
         
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.3/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{{ asset('assets/js/dist/waitme.min.js') }}"></script>
