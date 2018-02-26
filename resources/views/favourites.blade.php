@@ -15,7 +15,7 @@ A way to visualise your top tracks and artists.
 @section('content')
     <div>
 
-        <favourite-tracks></favourite-tracks>
+        <favourite-tracks-and-artists></favourite-tracks-and-artists>
 
         <!-- <div class="fixed pin z-50 overflow-auto bg-smoke-darker flex">
             <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex">

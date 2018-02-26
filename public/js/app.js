@@ -31125,6 +31125,7 @@ window.Vue = __webpack_require__(162);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('favourite-tracks-and-artists', __webpack_require__(227));
 Vue.component('favourite-tracks', __webpack_require__(165));
 Vue.component('reset-button', __webpack_require__(168));
 Vue.component('analysed-track-modal', __webpack_require__(171));
@@ -64266,65 +64267,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['tracks'],
+
     data: function data() {
         return {
-            tracks: [],
-            type: 'tracks',
-            term: 'medium_term',
             analysedTrack: {},
             showModal: false
         };
@@ -64332,35 +64280,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        fetchStats: function fetchStats() {
-            var _this = this;
-
-            $('#fetchStats').addClass('loader');
-            $('#fetchStats').prop("disabled", true);
-
-            this.tracks = [];
-            axios.get('/myfavouritesdata', {
-                params: {
-                    type: this.type,
-                    time_range: this.term
-                }
-            }).then(function (response) {
-                _this.tracks = response.data;
-                _this.$nextTick(function () {
-                    $('.bg-image').css('height', $('.bg-image').width());
-                    $('#fetchStats').removeClass('loader');
-                    $('#fetchStats').prop("disabled", false);
-                });
-            });
-        },
-        reset: function reset() {
-            this.tracks = [];
-        },
         toggleModal: function toggleModal() {
             this.showModal = !this.showModal;
         },
         fetchAnalysedTrack: function fetchAnalysedTrack(track, event) {
-            var _this2 = this;
+            var _this = this;
 
             $(event.target).addClass("loader");
             this.analysedTrackData = [];
@@ -64369,9 +64293,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     track: track.id
                 }
             }).then(function (response) {
-                _this2.analysedTrack = response.data;
-                _this2.analysedTrack["title"] = track.name;
-                _this2.toggleModal();
+                _this.analysedTrack = response.data;
+                _this.analysedTrack["title"] = track.name;
+                _this.toggleModal();
                 $(event.target).removeClass("loader");
             });
         }
@@ -64389,333 +64313,99 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h1", { staticClass: "font-bold text-3xl text-white mt-4 ml-8" }, [
-        _vm._v("My Top Tracks & Artists")
-      ]),
-      _vm._v(" "),
-      this.tracks.length == 0
-        ? _c(
-            "div",
-            {
-              staticClass:
-                "max-w-md rounded overflow-hidden shadow-lg mx-auto mt-8 border bg-grey-lightest"
-            },
-            [
-              _c("div", { staticClass: "py-4 px-4" }, [
-                _c("h2", { staticClass: "font-bold text-xl pb-2 border-b" }, [
-                  _vm._v("\n                Query Options\n            ")
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "mt-2" }, [
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          _vm.fetchStats($event)
-                        }
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "text-l font-bold mb-2" }, [
-                        _vm._v("Track or artist?")
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "inline-block relative w-auto mb-6" },
-                        [
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.type,
-                                  expression: "type"
-                                }
-                              ],
-                              staticClass:
-                                "block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow",
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.type = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                }
-                              }
-                            },
-                            [
-                              _c("option", { attrs: { value: "tracks" } }, [
-                                _vm._v("Top Tracks")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "artists" } }, [
-                                _vm._v("Top Artists")
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
-                            },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "fill-current h-4 w-4",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 20 20"
-                                  }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      d:
-                                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "text-l font-bold mb-2" }, [
-                        _vm._v(
-                          "When calculating this, how much data should we look at?"
+      _c(
+        "div",
+        { staticClass: "flex flex-wrap justify-between mb-4 mt-8 -mx-2" },
+        _vm._l(_vm.tracks, function(track, index) {
+          return _c("div", { key: track.id, staticClass: "w-1/3 px-2 pb-2" }, [
+            _c("div", { staticClass: "bg-grey-lightest h-full" }, [
+              _c(
+                "div",
+                { staticClass: "max-w-sm overflow-hidden h-full relative" },
+                [
+                  _c("img", {
+                    staticClass: "w-full bg-image",
+                    attrs: { src: track.album.images[1].url, alt: track.name }
+                  }),
+                  _vm._v(" "),
+                  _c("div", {}, [
+                    _c("div", { staticClass: "px-6 pt-4 pb-8 mb-8" }, [
+                      _c("div", { staticClass: "flex" }, [
+                        _c(
+                          "div",
+                          { staticClass: "font-bold text-xl mb-2 flex-grow" },
+                          [_vm._v(_vm._s(track.name))]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "inline-block rounded-full h-8 w-8 flex items-center justify-center bg-grey text-white flex-no-shrink ml-1"
+                          },
+                          [_vm._v(_vm._s(index + 1))]
                         )
                       ]),
                       _vm._v(" "),
                       _c(
-                        "div",
-                        { staticClass: "inline-block relative w-auto mb-6" },
+                        "p",
+                        { staticClass: "text-grey-darker text-base flex-1" },
                         [
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.term,
-                                  expression: "term"
-                                }
-                              ],
-                              staticClass:
-                                "block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow",
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.term = $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                }
-                              }
-                            },
-                            [
-                              _c("option", { attrs: { value: "short_term" } }, [
-                                _vm._v("Last 4 weeks")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "option",
-                                { attrs: { value: "medium_term" } },
-                                [_vm._v("Last 6 months")]
-                              ),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "long_term" } }, [
-                                _vm._v("Since the beginning of time")
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
-                            },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "fill-current h-4 w-4",
-                                  attrs: {
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    viewBox: "0 0 20 20"
-                                  }
-                                },
-                                [
-                                  _c("path", {
-                                    attrs: {
-                                      d:
-                                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(track.artists[0].name) +
+                              "\n                            "
                           )
                         ]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(0),
-                      _vm._v(" "),
-                      _vm._m(1)
-                    ]
-                  )
-                ])
-              ])
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _c("reset-button", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.tracks.length > 0,
-            expression: "tracks.length > 0"
-          }
-        ],
-        on: { reset: _vm.reset }
-      }),
-      _vm._v(" "),
-      this.tracks.length > 0
-        ? _c(
-            "div",
-            { staticClass: "flex flex-wrap justify-between mb-4 mt-8 -mx-2" },
-            _vm._l(_vm.tracks, function(track, index) {
-              return _vm.type == "tracks"
-                ? _c("div", { key: track.id, staticClass: "w-1/3 px-2 pb-2" }, [
-                    _c("div", { staticClass: "bg-grey-lightest h-full" }, [
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "px-2 pb-4" }, [
                       _c(
                         "div",
                         {
-                          staticClass:
-                            "max-w-sm overflow-hidden h-full relative"
+                          staticClass: "absolute pin-b",
+                          staticStyle: { padding: "inherit" }
                         },
                         [
-                          _c("img", {
-                            staticClass: "w-full bg-image",
-                            attrs: {
-                              src: track.album.images[1].url,
-                              alt: track.name
-                            }
-                          }),
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.fetchAnalysedTrack(track, $event)
+                                }
+                              }
+                            },
+                            [_vm._v("See Track Elements")]
+                          ),
                           _vm._v(" "),
-                          _c("div", {}, [
-                            _c("div", { staticClass: "px-6 pt-4 pb-8 mb-8" }, [
-                              _c("div", { staticClass: "flex" }, [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "font-bold text-xl mb-2 flex-grow"
-                                  },
-                                  [_vm._v(_vm._s(track.name))]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "inline-block rounded-full h-8 w-8 flex items-center justify-center bg-grey text-white flex-no-shrink ml-1"
-                                  },
-                                  [_vm._v(_vm._s(index + 1))]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "text-grey-darker text-base flex-1"
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(track.artists[0].name) +
-                                      "\n                            "
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "px-2 pb-4" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "absolute pin-b",
-                                  staticStyle: { padding: "inherit" }
-                                },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
-                                      attrs: { href: "#" },
-                                      on: {
-                                        click: function($event) {
-                                          $event.preventDefault()
-                                          _vm.fetchAnalysedTrack(track, $event)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("See Track Elements")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass:
-                                        "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
-                                      attrs: {
-                                        href: track.external_urls.spotify,
-                                        target: "_blank"
-                                      }
-                                    },
-                                    [_vm._v("Play")]
-                                  )
-                                ]
-                              )
-                            ])
-                          ])
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
+                              attrs: {
+                                href: track.external_urls.spotify,
+                                target: "_blank"
+                              }
+                            },
+                            [_vm._v("Play")]
+                          )
                         ]
                       )
                     ])
                   ])
-                : _vm._e()
-            })
-          )
-        : _vm._e(),
+                ]
+              )
+            ])
+          ])
+        })
+      ),
       _vm._v(" "),
       _vm.showModal
         ? _c("analysed-track-modal", {
@@ -64727,45 +64417,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "block" }, [
-      _c(
-        "button",
-        {
-          staticClass:
-            "bg-neon-green hover:bg-neon-green-dark text-white font-bold py-2 px-4 rounded mt-2",
-          attrs: { id: "fetchStats" }
-        },
-        [_vm._v("Fetch Stats")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", { staticStyle: {} }, [
-      _c("small", [
-        _c(
-          "span",
-          {
-            staticClass: "hint--right",
-            staticStyle: { display: "inline-block" },
-            attrs: {
-              "data-hint":
-                "Measured on the expected preference a user has for a particular track or artist. It is based on user behavior, including play history."
-            }
-          },
-          [_vm._v("How is this calculated?")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -78114,6 +77766,443 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(228)
+/* template */
+var __vue_template__ = __webpack_require__(229)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\FavouriteTracksAndArtists.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-55278b3f", Component.options)
+  } else {
+    hotAPI.reload("data-v-55278b3f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 228 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            items: [],
+            type: 'tracks',
+            term: 'medium_term'
+        };
+    },
+
+
+    methods: {
+        fetchItems: function fetchItems() {
+            var _this = this;
+
+            $('#fetchItems').addClass('loader');
+            $('#fetchStats').prop("disabled", true);
+
+            this.items = [];
+            axios.get('/myfavouritesdata', {
+                params: {
+                    type: this.type,
+                    time_range: this.term
+                }
+            }).then(function (response) {
+                _this.items = response.data;
+                _this.$nextTick(function () {
+                    $('.bg-image').css('height', $('.bg-image').width());
+                    $('#fetchItems').removeClass('loader');
+                    $('#fetchItems').prop("disabled", false);
+                });
+            });
+        },
+        reset: function reset() {
+            this.items = [];
+        }
+    }
+});
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("h1", { staticClass: "font-bold text-3xl text-white mt-4 ml-8" }, [
+        _vm._v("My Top Tracks & Artists")
+      ]),
+      _vm._v(" "),
+      this.items.length == 0
+        ? _c(
+            "div",
+            {
+              staticClass:
+                "max-w-md rounded overflow-hidden shadow-lg mx-auto mt-8 border bg-grey-lightest"
+            },
+            [
+              _c("div", { staticClass: "py-4 px-4" }, [
+                _c("h2", { staticClass: "font-bold text-xl pb-2 border-b" }, [
+                  _vm._v("\n                Query Options\n            ")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-2" }, [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          _vm.fetchItems($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "text-l font-bold mb-2" }, [
+                        _vm._v("Track or artist?")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "inline-block relative w-auto mb-6" },
+                        [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.type,
+                                  expression: "type"
+                                }
+                              ],
+                              staticClass:
+                                "block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.type = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "tracks" } }, [
+                                _vm._v("Top Tracks")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "artists" } }, [
+                                _vm._v("Top Artists")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "fill-current h-4 w-4",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "text-l font-bold mb-2" }, [
+                        _vm._v(
+                          "When calculating this, how much data should we look at?"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "inline-block relative w-auto mb-6" },
+                        [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.term,
+                                  expression: "term"
+                                }
+                              ],
+                              staticClass:
+                                "block appearance-none w-full bg-white border border-grey-light hover:border-grey px-4 py-2 pr-8 rounded shadow",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.term = $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "short_term" } }, [
+                                _vm._v("Last 4 weeks")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "option",
+                                { attrs: { value: "medium_term" } },
+                                [_vm._v("Last 6 months")]
+                              ),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "long_term" } }, [
+                                _vm._v("Since the beginning of time")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "pointer-events-none absolute pin-y pin-r flex items-center px-2 text-grey-darker"
+                            },
+                            [
+                              _c(
+                                "svg",
+                                {
+                                  staticClass: "fill-current h-4 w-4",
+                                  attrs: {
+                                    xmlns: "http://www.w3.org/2000/svg",
+                                    viewBox: "0 0 20 20"
+                                  }
+                                },
+                                [
+                                  _c("path", {
+                                    attrs: {
+                                      d:
+                                        "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ]
+                  )
+                ])
+              ])
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("reset-button", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.items.length > 0,
+            expression: "items.length > 0"
+          }
+        ],
+        on: { reset: _vm.reset }
+      }),
+      _vm._v(" "),
+      _vm.items.length > 0 && _vm.type == "tracks"
+        ? _c("favourite-tracks", { attrs: { tracks: _vm.items } })
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "block" }, [
+      _c(
+        "button",
+        {
+          staticClass:
+            "bg-neon-green hover:bg-neon-green-dark text-white font-bold py-2 px-4 rounded mt-2",
+          attrs: { id: "fetchItems" }
+        },
+        [_vm._v("Fetch Stats")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticStyle: {} }, [
+      _c("small", [
+        _c(
+          "span",
+          {
+            staticClass: "hint--right",
+            staticStyle: { display: "inline-block" },
+            attrs: {
+              "data-hint":
+                "Measured on the expected preference a user has for a particular track or artist. It is based on user behavior, including play history."
+            }
+          },
+          [_vm._v("How is this calculated?")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-55278b3f", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

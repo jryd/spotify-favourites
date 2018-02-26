@@ -15,6 +15,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('favourite-tracks-and-artists', require('./components/FavouriteTracksAndArtists.vue'));
 Vue.component('favourite-tracks', require('./components/FavouriteTracks.vue'));
 Vue.component('reset-button', require('./components/ResetButton.vue'));
 Vue.component('analysed-track-modal', require('./components/AnalysedTrackModal.vue'));
