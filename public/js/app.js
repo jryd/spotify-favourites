@@ -31125,8 +31125,9 @@ window.Vue = __webpack_require__(162);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('favourite-tracks-and-artists', __webpack_require__(227));
+Vue.component('favourites-control-panel', __webpack_require__(230));
 Vue.component('favourite-tracks', __webpack_require__(165));
+Vue.component('favourite-artists', __webpack_require__(233));
 Vue.component('reset-button', __webpack_require__(168));
 Vue.component('analysed-track-modal', __webpack_require__(171));
 
@@ -77772,15 +77773,18 @@ if (false) {
 /* 224 */,
 /* 225 */,
 /* 226 */,
-/* 227 */
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(10)
 /* script */
-var __vue_script__ = __webpack_require__(228)
+var __vue_script__ = __webpack_require__(231)
 /* template */
-var __vue_template__ = __webpack_require__(229)
+var __vue_template__ = __webpack_require__(232)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -77797,7 +77801,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\FavouriteTracksAndArtists.vue"
+Component.options.__file = "resources\\assets\\js\\components\\FavouritesControlPanel.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -77806,9 +77810,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-55278b3f", Component.options)
+    hotAPI.createRecord("data-v-18e1f468", Component.options)
   } else {
-    hotAPI.reload("data-v-55278b3f", Component.options)
+    hotAPI.reload("data-v-18e1f468", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -77819,11 +77823,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 228 */
+/* 231 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -77921,7 +77926,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 229 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78151,6 +78156,10 @@ var render = function() {
       _vm._v(" "),
       _vm.items.length > 0 && _vm.type == "tracks"
         ? _c("favourite-tracks", { attrs: { tracks: _vm.items } })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.items.length > 0 && _vm.type == "artists"
+        ? _c("favourite-artists", { attrs: { artists: _vm.items } })
         : _vm._e()
     ],
     1
@@ -78200,7 +78209,190 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-55278b3f", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-18e1f468", module.exports)
+  }
+}
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(234)
+/* template */
+var __vue_template__ = __webpack_require__(235)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\FavouriteArtists.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-aa45a1cc", Component.options)
+  } else {
+    hotAPI.reload("data-v-aa45a1cc", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 234 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['artists'],
+
+    data: function data() {
+        return {};
+    },
+
+
+    methods: {}
+});
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "flex flex-wrap justify-between mb-4 mt-8 -mx-2" },
+      _vm._l(_vm.artists, function(artist, index) {
+        return _c("div", { key: artist.id, staticClass: "w-1/3 px-2 pb-2" }, [
+          _c("div", { staticClass: "bg-grey-lightest h-full" }, [
+            _c(
+              "div",
+              { staticClass: "max-w-sm overflow-hidden h-full relative" },
+              [
+                _c("img", {
+                  staticClass: "w-full bg-image",
+                  attrs: { src: artist.images[1].url, alt: artist.name }
+                }),
+                _vm._v(" "),
+                _c("div", {}, [
+                  _c("div", { staticClass: "px-6 pt-4 pb-8 mb-8" }, [
+                    _c("div", { staticClass: "flex" }, [
+                      _c(
+                        "div",
+                        { staticClass: "font-bold text-xl mb-2 flex-grow" },
+                        [_vm._v(_vm._s(artist.name))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "inline-block rounded-full h-8 w-8 flex items-center justify-center bg-grey text-white flex-no-shrink ml-1"
+                        },
+                        [_vm._v(_vm._s(index + 1))]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "px-2 pb-4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "absolute pin-b",
+                        staticStyle: { padding: "inherit" }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
+                            attrs: {
+                              href: artist.external_urls.spotify,
+                              target: "_blank"
+                            }
+                          },
+                          [_vm._v("Play")]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ])
+        ])
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-aa45a1cc", module.exports)
   }
 }
 

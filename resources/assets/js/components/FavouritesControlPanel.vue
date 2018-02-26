@@ -52,6 +52,7 @@
         <reset-button v-show="items.length > 0" v-on:reset="reset"></reset-button>
 
         <favourite-tracks :tracks="items" v-if="items.length > 0 && type == 'tracks'"></favourite-tracks>
+        <favourite-artists :artists="items" v-if="items.length > 0 && type == 'artists'"></favourite-artists>
     </div>
 </template>
 
