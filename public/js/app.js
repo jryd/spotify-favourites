@@ -31126,7 +31126,7 @@ window.Vue = __webpack_require__(162);
  */
 
 Vue.component('favourite-tracks', __webpack_require__(165));
-Vue.component('tooltip-button', __webpack_require__(168));
+Vue.component('reset-button', __webpack_require__(168));
 Vue.component('analysed-track-modal', __webpack_require__(171));
 
 var app = new Vue({
@@ -64318,7 +64318,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -64596,31 +64595,17 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.tracks.length > 0,
-              expression: "tracks.length > 0"
-            }
-          ],
-          staticClass: "fixed pin-r pin-b mb-4 mr-4 z-10;"
-        },
-        [
-          _c(
-            "button",
-            {
-              staticClass:
-                "bg-neon-green hover:bg-neon-green-dark text-white font-bold py-2 px-4 rounded mt-2",
-              on: { click: _vm.reset }
-            },
-            [_vm._v("Go again!")]
-          )
-        ]
-      ),
+      _c("reset-button", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.tracks.length > 0,
+            expression: "tracks.length > 0"
+          }
+        ],
+        on: { reset: _vm.reset }
+      }),
       _vm._v(" "),
       this.tracks.length > 0
         ? _c(
@@ -64632,7 +64617,10 @@ var render = function() {
                     _c("div", { staticClass: "bg-grey-lightest h-full" }, [
                       _c(
                         "div",
-                        { staticClass: "max-w-sm overflow-hidden v-full" },
+                        {
+                          staticClass:
+                            "max-w-sm overflow-hidden h-full relative"
+                        },
                         [
                           _c("img", {
                             staticClass: "w-full bg-image",
@@ -64643,7 +64631,7 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("div", {}, [
-                            _c("div", { staticClass: "px-6 py-4" }, [
+                            _c("div", { staticClass: "px-6 pt-4 pb-8 mb-8" }, [
                               _c("div", { staticClass: "flex" }, [
                                 _c(
                                   "div",
@@ -64680,34 +64668,43 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "px-6 py-4" }, [
+                            _c("div", { staticClass: "px-2 pb-4" }, [
                               _c(
-                                "a",
+                                "div",
                                 {
-                                  staticClass:
-                                    "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
-                                  attrs: { href: "#" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.fetchAnalysedTrack(track, $event)
-                                    }
-                                  }
+                                  staticClass: "absolute pin-b",
+                                  staticStyle: { padding: "inherit" }
                                 },
-                                [_vm._v("See Track Elements")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
-                                  attrs: {
-                                    href: track.external_urls.spotify,
-                                    target: "_blank"
-                                  }
-                                },
-                                [_vm._v("Play")]
+                                [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.fetchAnalysedTrack(track, $event)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("See Track Elements")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass:
+                                        "inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey",
+                                      attrs: {
+                                        href: track.external_urls.spotify,
+                                        target: "_blank"
+                                      }
+                                    },
+                                    [_vm._v("Play")]
+                                  )
+                                ]
                               )
                             ])
                           ])
@@ -64804,7 +64801,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\TooltipButton.vue"
+Component.options.__file = "resources\\assets\\js\\components\\ResetButton.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -64813,9 +64810,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5714d4ae", Component.options)
+    hotAPI.createRecord("data-v-2b3bdf3a", Component.options)
   } else {
-    hotAPI.reload("data-v-5714d4ae", Component.options)
+    hotAPI.reload("data-v-2b3bdf3a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -64837,85 +64834,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            tracks: [],
-            type: 'tracks',
-            term: 'medium_term',
-            analysedTrack: [],
-            analysedTrackLabels: ['acousticness', 'danceability', 'energy', 'instrumentalness', 'liveness', 'speechiness', 'valence'],
-            analysedTrackDataSet: [],
-            myRadarChart: ''
-        };
-    },
-
 
     methods: {
-        fetchStats: function fetchStats() {
-            var _this = this;
-
-            /* $('#fetchStats').addClass('is-loading');
-            $('#fetchStats').prop("disabled", true); */
-
-            this.tracks = [];
-            axios.get('/myfavouritesdata', {
-                params: {
-                    type: this.type,
-                    time_range: this.term
-                }
-            }).then(function (response) {
-                _this.tracks = response.data;
-                _this.$nextTick(function () {
-                    $('.bg-image').css('height', $('.bg-image').width());
-                    // $('#fetchStats').removeClass('is-loading');
-                    // $('#fetchStats').prop("disabled", false);
-                });
-            });
-        },
         reset: function reset() {
-            this.tracks = [];
-        },
-        fetchAnalysedTrack: function fetchAnalysedTrack(track) {
-            var _this2 = this;
-
-            this.analysedTrack = [];
-            axios.get('/analysedtrackdata', { params: { track: track } }).then(function (response) {
-                _this2.analysedTrack = response.body;
-                _this2.analysedTrackDataSet = [_this2.analysedTrack.acousticness, _this2.analysedTrack.danceability, _this2.analysedTrack.energy, _this2.analysedTrack.instrumentalness, _this2.analysedTrack.liveness, _this2.analysedTrack.speechiness, _this2.analysedTrack.valence];
-                var data = {
-                    labels: _this2.analysedTrackLabels,
-                    datasets: [{
-                        label: "Analysed Track Elements",
-                        backgroundColor: "rgba(246,104,94,0.2)",
-                        borderColor: "#f44336",
-                        pointBackgroundColor: "rgba(246,104,94,1)",
-                        pointBorderColor: "#f44336",
-                        data: _this2.analysedTrackDataSet
-                    }],
-                    legend: {
-                        display: false
-                    }
-                };
-
-                _this2.myRadarChart = new Chart($("#analysedTrackRadar"), {
-                    type: 'radar',
-                    data: data,
-                    options: {
-                        legend: {
-                            display: false
-                        }
-                    }
-                });
-
-                $(".modal").addClass('is-active');
-            });
-        },
-        destroyAnalysedTrackRadar: function destroyAnalysedTrackRadar() {
-            this.myRadarChart.destroy();
-            $(".modal").removeClass('is-active');
+            this.$emit('reset');
         }
     }
 });
@@ -64928,29 +64852,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass:
-        "inline-block relative bg-blue hover:bg-blue-dark text-white font-bold py-4 px-4 rounded-full",
-      on: {
-        mouseover: function($event) {
-          _vm.showToolTip = true
-        },
-        mouseleave: function($event) {
-          _vm.showToolTip = false
-        }
-      }
-    },
-    [
-      _vm._t("default"),
-      _vm._v(" "),
-      _c("Tooltip", {
-        attrs: { transition: _vm.transition, show: _vm.showToolTip }
-      })
-    ],
-    2
-  )
+  return _c("div", { staticClass: "fixed pin-r pin-b mb-4 mr-4 z-10;" }, [
+    _c(
+      "button",
+      {
+        staticClass:
+          "bg-neon-green hover:bg-neon-green-dark text-white font-bold py-2 px-4 rounded mt-2",
+        on: { click: _vm.reset }
+      },
+      [_vm._v("Go again!")]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -64958,7 +64870,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5714d4ae", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2b3bdf3a", module.exports)
   }
 }
 

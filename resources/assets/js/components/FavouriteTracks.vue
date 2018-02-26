@@ -49,9 +49,7 @@
             </div>
         </div>
 
-        <div class="fixed pin-r pin-b mb-4 mr-4 z-10;" v-show="tracks.length > 0">
-            <button class="bg-neon-green hover:bg-neon-green-dark text-white font-bold py-2 px-4 rounded mt-2" v-on:click="reset">Go again!</button>
-        </div>
+        <reset-button v-show="tracks.length > 0" v-on:reset="reset"></reset-button>
 
         <div class="flex flex-wrap justify-between mb-4 mt-8 -mx-2" v-if="this.tracks.length > 0">
             <div class="w-1/3 px-2 pb-2"
@@ -60,10 +58,10 @@
                 :key="track.id"
             >
                 <div class="bg-grey-lightest h-full">
-                    <div class="max-w-sm overflow-hidden v-full">
+                    <div class="max-w-sm overflow-hidden h-full relative">
                         <img class="w-full bg-image" :src="track.album.images[1].url" :alt="track.name">
                         <div class="">
-                            <div class="px-6 py-4">
+                            <div class="px-6 pt-4 pb-8 mb-8">
                                 <div class="flex">
                                     <div class="font-bold text-xl mb-2 flex-grow">{{ track.name }}</div>
                                     <div class="inline-block rounded-full h-8 w-8 flex items-center justify-center bg-grey text-white flex-no-shrink ml-1">{{ index + 1 }}</div>
@@ -73,11 +71,12 @@
                                 </p>
                             </div>
 
-                            <div class="px-6 py-4">
-                                <a href="#" class="inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey" @click.prevent="fetchAnalysedTrack(track, $event)">See Track Elements</a>
-                                <a :href="track.external_urls.spotify" target="_blank" class="inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey">Play</a>
+                            <div class="px-2 pb-4">
+                                <div class="absolute pin-b" style="padding: inherit;">
+                                    <a href="#" class="inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey" @click.prevent="fetchAnalysedTrack(track, $event)">See Track Elements</a>
+                                    <a :href="track.external_urls.spotify" target="_blank" class="inline-block bg-grey rounded-full px-3 py-1 text-grey-lightest mr-2 no-underline hover:bg-grey">Play</a>
+                                </div>
                             </div>
-
                         </div>
 
                     </div>

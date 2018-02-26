@@ -16,7 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('favourite-tracks', require('./components/FavouriteTracks.vue'));
-Vue.component('tooltip-button', require('./components/TooltipButton.vue'));
+Vue.component('reset-button', require('./components/ResetButton.vue'));
 Vue.component('analysed-track-modal', require('./components/AnalysedTrackModal.vue'));
 
 const app = new Vue({
